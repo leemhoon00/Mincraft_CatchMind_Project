@@ -1,5 +1,6 @@
 import cv2
 import RPi.GPIO as gp
+import numpy as np
 
 def capture():
     cam = cv2.VideoCapture(0,cv2.CAP_V4L)
@@ -23,4 +24,5 @@ def capture():
 
     cam.release()
     cv2.destroyAllWindows()
+
     return frame

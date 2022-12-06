@@ -3,7 +3,6 @@ import numpy as np
 import cv2
 from mcpi import minecraft
 
-mc = minecraft.Minecraft.create()
 
 img = cv2.imread('../lenna.PNG')
 #cv2.imshow('dddd',img)

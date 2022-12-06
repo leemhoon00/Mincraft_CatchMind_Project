@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-from mcpi.minecraft import Minecraft
+#from mcpi.minecraft import Minecraft
 
-mc = Minecraft.create()
+#self.mc = Minecraft.create()
 
 class RGBBlock:
-    def __init__(self):
+    def __init__(self,mc):
         self.RGB = np.empty((0,3),int)
         self.block = np.empty((0,2),int)
         self.activeBlock()
+        self.mc = mc
     
     def add(self,r1,g1,b1,blockID,blockData):
         self.RGB = np.append(self.RGB,np.array([[r1,g1,b1]]),axis=0)
@@ -72,39 +73,42 @@ class RGBBlock:
         array = array.sum(axis=1)
         return array.argmin()
     
+    
     def setPaintLocation(self):#64x64
         self.x = 0
         self.y = 0
         self.z = 0
-        mc.setBlocks(self.x-64,self.y+64,self.z+64,self.x,self.y,self.z,0,0)#주변공간 밀기
-        mc.setBlocks(self.x+1,self.y,self.z,self.x+1,self.y+64,self.z+64,35,0)#게임시작 테이블 설치 앞면
-        mc.setBlocks(self.x-65,self.y,self.z,self.x-65,self.y+64,self.z+64,35,15)#게임시작 테이블 설치 뒷면
-        mc.setBlocks(self.x,self.y,self.z+65,self.x-65,self.y+64,self.z+65,35,15)#게임시작 테이블 설치 오른쪽면
-        mc.setBlocks(self.x,self.y,self.z-1,self.x-65,self.y+64,self.z-1,35,15)#게임시작 테이블 설치 왼쪽면
-        mc.setBlocks(self.x,self.y-1,self.z,self.x-65,self.y-1,self.z+64,35,15)#게임시작 테이블 설치 플레이어 바닥면
-        mc.player.setPos(self.x-32,self.y,self.z+32)#중앙으로 플레이어 이동
+        self.mc.setBlocks(self.x-64,self.y+64,self.z+64,self.x,self.y,self.z,0,0)#주변공간 밀기
+        self.mc.setBlocks(self.x+1,self.y,self.z,self.x+1,self.y+64,self.z+64,35,0)#게임시작 테이블 설치 앞면
+        self.mc.setBlocks(self.x-65,self.y,self.z,self.x-65,self.y+64,self.z+64,35,15)#게임시작 테이블 설치 뒷면
+        self.mc.setBlocks(self.x,self.y,self.z+65,self.x-65,self.y+64,self.z+65,35,15)#게임시작 테이블 설치 오른쪽면
+        self.mc.setBlocks(self.x,self.y,self.z-1,self.x-65,self.y+64,self.z-1,35,15)#게임시작 테이블 설치 왼쪽면
+        self.mc.setBlocks(self.x,self.y-1,self.z,self.x-65,self.y-1,self.z+64,35,15)#게임시작 테이블 설치 플레이어 바닥면
+        self.mc.player.setPos(self.x-32,self.y,self.z+32)#중앙으로 플레이어 이동
         self.y = 63
         
+    # 주변환경 정리 후 플레이어 위치이동
     def setPaint128Location(self):#128x128
         self.x = 0
         self.y = 0
         self.z = -64
-        mc.setBlocks(self.x-110,self.y-64,self.z+128,self.x,self.y+64,self.z,0,0)#주변공간 밀기
-        mc.setBlocks(self.x+1,self.y+64,self.z,self.x+1,self.y-64,self.z+128,35,0)#게임시작 테이블 설치 앞면
-        mc.setBlocks(self.x-110,self.y+64,self.z,self.x-110,self.y-64,self.z+128,35,15)#게임시작 테이블 설치 뒷면
-        mc.setBlocks(self.x,self.y+64,self.z+129,self.x-110,self.y-64,self.z+129,35,15)#게임시작 테이블 설치 오른쪽면
-        mc.setBlocks(self.x,self.y+64,self.z-1,self.x-110,self.y-64,self.z-1,35,15)#게임시작 테이블 설치 왼쪽면
-        mc.setBlocks(self.x-100,self.y-1,self.z+54,self.x-110,self.y-1,self.z+74,35,15)#게임시작 테이블 설치 플레이어 바닥면
-        mc.player.setPos(self.x-103,self.y,self.z+64)#중앙으로 플레이어 이동
+        self.mc.setBlocks(self.x-110,self.y-64,self.z+128,self.x,self.y+64,self.z,0,0)#주변공간 밀기
+        self.mc.setBlocks(self.x+1,self.y+64,self.z,self.x+1,self.y-64,self.z+128,35,0)#게임시작 테이블 설치 앞면
+        self.mc.setBlocks(self.x-110,self.y+64,self.z,self.x-110,self.y-64,self.z+128,35,15)#게임시작 테이블 설치 뒷면
+        self.mc.setBlocks(self.x,self.y+64,self.z+129,self.x-110,self.y-64,self.z+129,35,15)#게임시작 테이블 설치 오른쪽면
+        self.mc.setBlocks(self.x,self.y+64,self.z-1,self.x-110,self.y-64,self.z-1,35,15)#게임시작 테이블 설치 왼쪽면
+        self.mc.setBlocks(self.x-100,self.y-1,self.z+54,self.x-110,self.y-1,self.z+74,35,15)#게임시작 테이블 설치 플레이어 바닥면
+        self.mc.player.setPos(self.x-103,self.y,self.z+64)#중앙으로 플레이어 이동
         self.y = 63
     
+    # 그림그릴 위치 잡아주기
     def setPixLocation(self):
         self.x = 0
         self.y = 63
         self.z = -64
         
     def printBlock(self,x,y,z,c):
-        mc.setBlock(x,y,z,self.block[c,0],self.block[c,1])
+        self.mc.setBlock(x,y,z,self.block[c,0],self.block[c,1])
         
     def print2DtoBlocks(self,pix):
         for i in range(len(pix)):

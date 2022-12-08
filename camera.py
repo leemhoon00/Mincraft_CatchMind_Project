@@ -25,4 +25,7 @@ def capture():
     cam.release()
     cv2.destroyAllWindows()
 
-    return frame
+    rgb = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+    rgb = cv2.resize(rgb,(128,128))
+    pix = np.array(rgb)
+    return pix

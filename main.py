@@ -5,12 +5,9 @@ from mcpi.minecraft import Minecraft
 import Draw_Screen as ds
 from mcpi import entity
 from mcpi import event
+import GUI
 
-mc = Minecraft.create()
-
-chatEvents = mc.events.pollChatPosts()
-print(chatEvents)
-
+GUI.Show_Textbox()
 # pix = camera.capture()
 
 # test = ds.RGBBlock(mc)

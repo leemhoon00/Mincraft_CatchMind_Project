@@ -7,11 +7,11 @@ from mcpi import entity
 from mcpi import event
 import GUI
 
-GUI.Show_Textbox()
-# pix = camera.capture()
+mc = Minecraft.create()
+pix = camera.capture()
 
-# test = ds.RGBBlock(mc)
-# test.setPaint128Location() #한번만 실행,도화지 그릴위치와 주변 환경정리
-# test.setPixLocation() #이미 맵이 완성되었으면 위치만 잡아주기
+test = ds.RGBBlock(mc)
+test.setPaint128Location() #한번만 실행,도화지 그릴위치와 주변 환경정리
+test.setPixLocation() #이미 맵이 완성되었으면 위치만 잡아주기
 
-# test.print2DtoBlocks(pix) #128X128PIX데이터(RGB) 입력시 프린터
+test.print2DtoBlocks(pix) #128X128PIX데이터(RGB) 입력시 프린터
